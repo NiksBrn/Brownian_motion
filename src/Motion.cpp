@@ -50,7 +50,7 @@ void handleCollisions() {
   }
 }
 
-std::pair<float, float> computeForces(Body& body) {
+std::pair<float, float> computeForces(RigidBody& body) {
   float fx = 0.0f, fy = 0.0f;
 
   for (const auto& other : bodies) {
@@ -58,7 +58,7 @@ std::pair<float, float> computeForces(Body& body) {
 
     float dx = other.x - body.x;
     float dy = other.y - body.y;
-    float distSq = dx * dx + dy * dy + softening * softening;
+    float distSq = dx * dx + dy * dy + softing * softing;
     float dist = sqrt(distSq);
     float invDist3 = 1.0f / (dist * distSq);
 
