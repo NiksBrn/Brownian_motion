@@ -3,7 +3,7 @@
 const int num_bodies = 50;      // Количество тел
 const double dt = 0.01f;        // Шаг по времени
 const double box_size = 10.0f;  // Размер области симуляции
-const float G = 1.0f;           // Гравитационная постоянная
+const float G = 0.01f;           // Гравитационная постоянная
 const float softing = 0.05f;    // Фактор мягкости для учета сокращения радиусов
 std::vector<RigidBody> bodies;  // Вектор тел
 

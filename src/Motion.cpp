@@ -23,21 +23,35 @@ void handleCollisions() {
         // Нормаль столкновения
         float nx = dx / distance;
         float ny = dy / distance;
+        float tx = -ny;
+        float ty = nx;
 
-        // Относительная скорость
-        float relative_velocity_x = bodies[i].vx - bodies[j].vx;
-        float relative_velocity_y = bodies[i].vy - bodies[j].vy;
+        // Проекции скоростей на нормаль и касательную
+        float v1n = bodies[i].vx * nx + bodies[i].vy * ny;
+        float v1t = bodies[i].vx * tx + bodies[i].vy * ty;
+        float v2n = bodies[j].vx * nx + bodies[j].vy * ny;
+        float v2t = bodies[j].vx * tx + bodies[j].vy * ty;
 
-        // Импульс вдоль нормали
-        float impulse = 2.0f *
-                        (relative_velocity_x * nx + relative_velocity_y * ny) /
-                        (1.0f / bodies[i].mass + 1.0f / bodies[j].mass);
+        float m1 = bodies[i].mass;
+        float m2 = bodies[j].mass;
 
-        // Обновление скоростей
-        bodies[i].vx -= impulse / bodies[i].mass * nx;
-        bodies[i].vy -= impulse / bodies[i].mass * ny;
-        bodies[j].vx += impulse / bodies[j].mass * nx;
-        bodies[j].vy += impulse / bodies[j].mass * ny;
+        double v1n_prime = (v1n * (m1 - m2) + 2 * m2 * v2n) / (m1 + m2);
+        double v2n_prime = (v2n * (m2 - m1) + 2 * m1 * v1n) / (m1 + m2);
+
+        // // Относительная скорость
+        // float relative_velocity_x = bodies[i].vx - bodies[j].vx;
+        // float relative_velocity_y = bodies[i].vy - bodies[j].vy;
+
+        // // Импульс вдоль нормали
+        // float impulse = 2.0f *
+        //                 (relative_velocity_x * nx + relative_velocity_y * ny) /
+        //                 (1.0f / bodies[i].mass + 1.0f / bodies[j].mass);
+
+         // Переводим обратно в вектора
+         bodies[i].vx = v1n_prime * nx + v1t * tx;
+         bodies[i].vy = v1n_prime * ny + v1t * ty;
+         bodies[j].vx = v2n_prime * nx + v2t * tx;
+         bodies[j].vy = v2n_prime * ny + v2t * ty;
 
         // Разделение тел
         float overlap = min_distance - distance;
