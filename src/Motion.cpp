@@ -72,7 +72,7 @@ std::pair<float, float> computeForces(RigidBody& body) {
 
     float dx = other.x - body.x;
     float dy = other.y - body.y;
-    float distSq = dx * dx + dy * dy + softing * softing;
+    float distSq = dx * dx + dy * dy + softening * softening;
     float dist = sqrt(distSq);
     float invDist3 = 1.0f / (dist * distSq);
 

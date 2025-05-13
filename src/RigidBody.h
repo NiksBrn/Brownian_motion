@@ -12,7 +12,7 @@ extern const int num_bodies;   // Количество тел
 extern const double dt;        // Шаг по времени
 extern const double box_size;  // Размер области симуляции
 extern const float G;  
-extern const float softing;
+extern const float softening;
 
 // Структура для представления тела
 struct RigidBody {

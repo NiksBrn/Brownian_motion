@@ -17,4 +17,4 @@ Run:
 ./BrownianMotion
 ```
 
-to stop the program, press Esk
+to stop the program, press esc
